@@ -13,6 +13,18 @@
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.199.1/g' package/base-files/files/bin/config_generate
 
+# 添加编译者信息到 99-default-settings-chinese
+sed -i '/exit 0/i\
+# 添加编译者信息\
+build_info="Compiled by Akihara-Sam build $(TZ=UTC-8 date "+%Y.%m.%d")"\
+uci -q get system.@imm_init[0].build_info > "/dev/null" || uci -q add system imm_init > "/dev/null"\
+uci set system.@imm_init[0].build_info="$build_info"\
+uci commit system\
+echo -e "\nDISTRIB_DESCRIPTION=\"$build_info\"" >> /etc/openwrt_release\
+echo "$build_info" >> /etc/banner
+' package/emortal/default-settings/files/99-default-settings-chinese
+
+
 # Modify default theme
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
