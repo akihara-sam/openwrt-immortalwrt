@@ -11,7 +11,7 @@
 #
 
 # Modify default IP
-#sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.199.1/g' package/base-files/files/bin/config_generate
 
 # Modify default theme
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
@@ -21,13 +21,13 @@
 
 
 # 删除旧的 Go 语言包
-rm -rf ./feeds/packages/lang/golang
+# rm -rf ./feeds/packages/lang/golang
 
 # 克隆指定版本的 Go 语言包
-git clone https://github.com/openwrt/packages.git -b master --single-branch --depth 1 temp_packages
+# git clone https://github.com/openwrt/packages.git -b master --single-branch --depth 1 temp_packages
 
 # 仅复制golang目录
-cp -R temp_packages/lang/golang ./feeds/packages/lang/
+# cp -R temp_packages/lang/golang ./feeds/packages/lang/
 
 # 清理临时文件
-rm -rf temp_packages
+# rm -rf temp_packages
